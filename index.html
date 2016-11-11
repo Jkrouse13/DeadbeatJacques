@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Notemeister 5000</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,19 +15,59 @@
 </head>
 <body>
   <!-- Content goes here. -->
-  <h1>Notemeister 5000</h1>
+  <div class="container">
+
+  <h1 class="text-center" id="header">Notemeister 5000</h1>
+  <div id="alerts">
+
+  </div>
   <div id="note_form">
     <h3>Create a Post!</h3>
     <form id="note">
-      <input type="text" name="title" placeholder="Title goes here!"/>
-      <textarea name="body"></textarea>
-      <input type="text" name="tags" placeholder="Tags please seperate by a comma!" />
+      <div class="form-group">
+        <label for="title_input">Title</label>
+        <input name="title" type="text" class="form-control" id="title_input" placeholder="Title">
+      </div>
+      <div clas="form-group">
+        <label for="body_input">Body</label>
+        <textarea name ="body" class="note_form_inputs form-control" id="body_input" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="tag_input">Tags</label>
+        <input name="tags" type="text" class="form-control" id="tag_input" placeholder="Please seperate tags by a comma!">
+      </div>
+      <input type="submit" name="submit" value="Create Note!" class="btn btn-success btn-block" />
     </form>
   </div>
   <div id="notes">
 
   </div>
+
+  <div id="handlebar_notes" class="tag_link">
+
+  </div>
+
+
+</div>
+
+
+    <!-- Handbar templates -->
+  <script id="note-template" type="text/x-handlebars-template">
+  <div class="entry">
+    <h3>{{title}}</h3>
+    <div class="body">
+      <p>
+        {{body}}
+      </p>
+    </div>
+  </div>
+  {{#each tags}}
+ <a href="https://calm-thicket-39625.herokuapp.com/api/notes/tag/{{name}}" class="tag_link">{{name}}</a>
+ {{/each}}
+</script>
+
   <!-- Scripts go here. -->
+
   <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
