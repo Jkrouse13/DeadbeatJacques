@@ -36,7 +36,17 @@ $('#note').on('submit', function (ev){
   handle_note_form(response)
   })
 })
-$('.tag_link').on('click', function(ev){
+$('#handlebar_notes').on('click', '.tag_link', function(ev){
   ev.preventDefault()
+  $('#handlebar_notes').html('')
+  $.getJSON('https://calm-thicket-39625.herokuapp.com/api/notes/tag/' + $(this).html())
+  .then(function(response){
+  response.tag.notes.forEach(function(notes){
+    var display_notes = template(notes)
+    $('#handlebar_notes').prepend(display_notes)
+    $('#header').html('')
+    $('#header').append('Notemeister 5000: ' + response.tag.name)
+  })
+  })
 
 })
