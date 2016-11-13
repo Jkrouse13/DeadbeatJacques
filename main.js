@@ -6,9 +6,20 @@ $(document).ready(function(){
         $('#handlebar_notes').prepend(display_notes)
       })
     })
+
+  if(window.location.hash.match(/#\d+/).length > 0) {
+   id = window.location.hash.substring(1)
+   $.getJSON('https://calm-thicket-39625.herokuapp.com/api/notes/' + id)
+   .then(function(response){
+     console.log(response)
+     var modal = modal_template(response.note)
+     $('#note_modal').prepend(modal)
+   })
+   }
 })
 
-
+var modal_source   = $("#modal-template").html()
+var modal_template = Handlebars.compile(modal_source)
 
 var note_source   = $("#note-template").html()
 var template = Handlebars.compile(note_source)
@@ -21,13 +32,6 @@ function handle_note_form(response){
 function clear_form(selector){
   $(selector)[0].reset()
 }
-// $.getJSON('https://calm-thicket-39625.herokuapp.com/api/notes')
-//   .then(function(response){
-//     response.notes.forEach(function(note){
-//       var display_notes = template(note)
-//       $('#handlebar_notes').prepend(display_notes)
-//     })
-//   })
 $('#note').on('submit', function (ev){
   ev.preventDefault()
   $.post('https://calm-thicket-39625.herokuapp.com/api/notes',
