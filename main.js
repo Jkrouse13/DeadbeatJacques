@@ -11,9 +11,10 @@ $(document).ready(function(){
    id = window.location.hash.substring(1)
    $.getJSON('https://calm-thicket-39625.herokuapp.com/api/notes/' + id)
    .then(function(response){
-     console.log(response)
-     var modal = modal_template(response.note)
-     $('#note_modal').prepend(modal)
+     console.log(response.note)
+     var  display_modal = modal_template(response.note)
+     $('#note_modal').append(display_modal)
+     $('#note_show').modal('show')
    })
    }
 })
